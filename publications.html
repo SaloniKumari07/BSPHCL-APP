@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications - Bihar State Power Holding Company Limited</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .emblem {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #1e3c72;
+            font-size: 24px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .page-header {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            border-bottom: 3px solid #2a5298;
+        }
+
+        .page-header h2 {
+            color: #1e3c72;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .page-header h2::before {
+            content: "📚";
+            font-size: 28px;
+        }
+
+        .tabs {
+            display: flex;
+            background: #e9ecef;
+            padding: 0;
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 15px 30px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: #495057;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+        }
+
+        .tab:hover {
+            background: #dee2e6;
+        }
+
+        .tab.active {
+            background: white;
+            color: #2a5298;
+            border-bottom-color: #2a5298;
+        }
+
+        .content-area {
+            padding: 30px;
+        }
+
+        .search-box {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #dee2e6;
+            border-radius: 25px;
+            font-size: 16px;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #2a5298;
+        }
+
+        .search-box button {
+            padding: 12px 30px;
+            background: #2a5298;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .search-box button:hover {
+            background: #1e3c72;
+        }
+
+        .publication-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .publication-card {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .publication-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .pub-icon {
+            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            font-size: 48px;
+        }
+
+        .pub-content {
+            padding: 20px;
+        }
+
+        .pub-category {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #e3f2fd;
+            color: #2196f3;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .pub-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e3c72;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .pub-meta {
+            color: #6c757d;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .pub-description {
+            color: #495057;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .pub-stats {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #6c757d;
+            font-size: 13px;
+        }
+
+        .pub-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            text-align: center;
+            flex: 1;
+        }
+
+        .btn-primary {
+            background: #2a5298;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1e3c72;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #2a5298;
+            border: 2px solid #2a5298;
+        }
+
+        .btn-outline:hover {
+            background: #2a5298;
+            color: white;
+        }
+
+        .year-filter {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .year-btn {
+            padding: 8px 20px;
+            border: 2px solid #dee2e6;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #495057;
+            transition: all 0.3s;
+        }
+
+        .year-btn:hover, .year-btn.active {
+            border-color: #2a5298;
+            background: #2a5298;
+            color: white;
+        }
+
+        footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .publication-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tabs {
+                flex-wrap: nowrap;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-section">
+                <div class="emblem">⚡</div>
+                <div>
+                    <h1>Bihar State Power Holding Company Limited</h1>
+                    <p class="subtitle">बिहार राज्य विद्युत होल्डिंग कंपनी लिमिटेड</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="page-header">
+            <h2>Publications</h2>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" data-tab="annual">Annual Reports</button>
+            <button class="tab" data-tab="financial">Financial Statements</button>
+            <button class="tab" data-tab="technical">Technical Reports</button>
+            <button class="tab" data-tab="policy">Policy Documents</button>
+            <button class="tab" data-tab="newsletters">Newsletters</button>
+            <button class="tab" data-tab="statistics">Statistics</button>
+        </div>
+
+        <div class="content-area">
+            <div class="search-box">
+                <input type="text" placeholder="Search publications by title, year, or keyword...">
+                <button>Search</button>
+            </div>
+
+            <div class="year-filter">
+                <span style="font-weight: 600; color: #495057; display: flex; align-items: center;">Filter by Year:</span>
+                <button class="year-btn active">All</button>
+                <button class="year-btn">2026</button>
+                <button class="year-btn">2025</button>
+                <button class="year-btn">2024</button>
+                <button class="year-btn">2023</button>
+                <button class="year-btn">2022</button>
+            </div>
+
+            <div class="publication-grid">
+                <!-- Publication 1 -->
+                <div class="publication-card">
+                    <div class="pub-icon">📊</div>
+                    <div class="pub-content">
+                        <span class="pub-category">Annual Report</span>
+                        <h3 class="pub-title">Annual Report 2024-2025</h3>
+                        <div class="pub-meta">📅 Published: December 2025 | 📄 156 pages</div>
+                        <p class="pub-description">
+                            Comprehensive annual report covering operational performance, financial highlights, infrastructure development, and future roadmap for FY 2024-25.
+                        </p>
+                        <div class="pub-stats">
+                            <div class="stat-item">
+                                <span>📥</span>
+                                <span>2,847 downloads</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>📏</span>
+                                <span>12.5 MB</span>
+                            </div>
+                        </div>
+                        <div class="pub-actions">
+                            <a href="#" class="btn btn-primary">Download PDF</a>
+                            <a href="#" class="btn btn-outline">View Online</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Publication 2 -->
+                <div class="publication-card">
+                    <div class="pub-icon">💰</div>
+                    <div class="pub-content">
+                        <span class="pub-category">Financial Statement</span>
+                        <h3 class="pub-title">Audited Financial Statements Q3 2025-26</h3>
+                        <div class="pub-meta">📅 Published: January 2026 | 📄 98 pages</div>
+                        <p class="pub-description">
+                            Quarterly audited financial statements including balance sheet, profit & loss account, and cash flow statements for Q3 FY 2025-26.
+                        </p>
+                        <div class="pub-stats">
+                            <div class="stat-item">
+                                <span>📥</span>
+                                <span>1,523 downloads</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>📏</span>
+                                <span>8.2 MB</span>
+                            </div>
+                        </div>
+                        <div class="pub-actions">
+                            <a href="#" class="btn btn-primary">Download PDF</a>
+                            <a href="#" class="btn btn-outline">View Online</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Publication 3 -->
+                <div class="publication-card">
+                    <div class="pub-icon">⚡</div>
+                    <div class="pub-content">
+                        <span class="pub-category">Technical Report</span>
+                        <h3 class="pub-title">Power Distribution Loss Reduction Study 2025</h3>
+                        <div class="pub-meta">📅 Published: November 2025 | 📄 124 pages</div>
+                        <p class="pub-description">
+                            Technical analysis of AT&C losses, distribution infrastructure assessment, and recommendations for loss reduction across Bihar circles.
+                        </p>
+                        <div class="pub-stats">
+                            <div class="stat-item">
+                                <span>📥</span>
+                                <span>3,241 downloads</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>📏</span>
+                                <span>15.7 MB</span>
+                            </div>
+                        </div>
+                        <div class="pub-actions">
+                            <a href="#" class="btn btn-primary">Download PDF</a>
+                            <a href="#" class="btn btn-outline">View Online</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Publication 4 -->
+                <div class="publication-card">
+                    <div class="pub-icon">📜</div>
+                    <div class="pub-content">
+                        <span class="pub-category">Policy Document</span>
+                        <h3 class="pub-title">Renewable Energy Integration Policy 2025</h3>
+                        <div class="pub-meta">📅 Published: October 2025 | 📄 67 pages</div>
+                        <p class="pub-description">
+                            Framework and guidelines for integration of solar and wind energy into Bihar's power distribution network and net metering policies.
+                        </p>
+                        <div class="pub-stats">
+                            <div class="stat-item">
+                                <span>📥</span>
+                                <span>4,156 downloads</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>📏</span>
+                                <span>5.4 MB</span>
+                            </div>
+                        </div>
+                        <div class="pub-actions">
+                            <a href="#" class="btn btn-primary">Download PDF</a>
+                            <a href="#" class="btn btn-outline">View Online</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Publication 5 -->
+                <div class="publication-card">
+                    <div class="pub-icon">📰</div>
+                    <div class="pub-content">
+                        <span class="pub-category">Newsletter</span>
+                        <h3 class="pub-title">BSPHCL Monthly Newsletter - January 2026</h3>
+                        <div class="pub-meta">📅 Published: January 2026 | 📄 24 pages</div>
+                        <p class="pub-description">
+                            Monthly newsletter featuring company updates, new initiatives, employee achievements, infrastructure projects, and consumer awareness programs.
+                        </p>
+                        <div class="pub-stats">
+                            <div class="stat-item">
+                                <span>📥</span>
+                                <span>987 downloads</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>📏</span>
+                                <span>3.1 MB</span>
+                            </div>
+                        </div>
+                        <div class="pub-actions">
+                            <a href="#" class="btn btn-primary">Download PDF</a>
+                            <a href="#" class="btn btn-outline">View Online</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Publication 6 -->
+                <div class="publication-card">
+                    <div class="pub-icon">📈</div>
+                    <div class="pub-content">
+                        <span class="pub-category">Statistics</span>
+                        <h3 class="pub-title">Bihar Power Sector Statistics 2024-25</h3>
+                        <div class="pub-meta">📅 Published: December 2025 | 📄 189 pages</div>
+                        <p class="pub-description">
+                            Comprehensive statistical data on power generation, transmission, distribution, consumption patterns, and infrastructure across Bihar.
+                        </p>
+                        <div class="pub-stats">
+                            <div class="stat-item">
+                                <span>📥</span>
+                                <span>5,432 downloads</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>📏</span>
+                                <span>18.9 MB</span>
+                            </div>
+                        </div>
+                        <div class="pub-actions">
+                            <a href="#" class="btn btn-primary">Download PDF</a>
+                            <a href="#" class="btn btn-outline">View Online</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Publication 7 -->
+                <div class="publication-card">
+                    <div class="pub-icon">🔧</div>
+                    <div class="pub-content">
+                        <span class="pub-category">Technical Report</span>
+                        <h3 class="pub-title">Smart Grid Implementation Roadmap</h3>
+                        <div class="pub-meta">📅 Published: September 2025 | 📄 142 pages</div>
+                        <p class="pub-description">
+                            Detailed roadmap for smart grid deployment, smart meter rollout, AMI infrastructure, and digital transformation initiatives in Bihar.
+                        </p>
+                        <div class="pub-stats">
+                            <div class="stat-item">
+                                <span>📥</span>
+                                <span>2,765 downloads</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>📏</span>
+                                <span>11.3 MB</span>
+                            </div>
+                        </div>
+                        <div class="pub-actions">
+                            <a href="#" class="btn btn-primary">Download PDF</a>
+                            <a href="#" class="btn btn-outline">View Online</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Publication 8 -->
+                <div class="publication-card">
+                    <div class="pub-icon">📋</div>
+                    <div class="pub-content">
+                        <span class="pub-category">Policy Document</span>
+                        <h3 class="pub-title">Consumer Rights & Grievance Redressal Mechanism</h3>
+                        <div class="pub-meta">📅 Published: August 2025 | 📄 45 pages</div>
+                        <p class="pub-description">
+                            Comprehensive guide on consumer rights, complaint filing procedures, timelines, and escalation matrix for grievance resolution.
+                        </p>
+                        <div class="pub-stats">
+                            <div class="stat-item">
+                                <span>📥</span>
+                                <span>6,234 downloads</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>📏</span>
+                                <span>4.2 MB</span>
+                            </div>
+                        </div>
+                        <div class="pub-actions">
+                            <a href="#" class="btn btn-primary">Download PDF</a>
+                            <a href="#" class="btn btn-outline">View Online</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Publication 9 -->
+                <div class="publication-card">
+                    <div class="pub-icon">🌍</div>
+                    <div class="pub-content">
+                        <span class="pub-category">Annual Report</span>
+                        <h3 class="pub-title">Sustainability & CSR Report 2024-25</h3>
+                        <div class="pub-meta">📅 Published: January 2026 | 📄 78 pages</div>
+                        <p class="pub-description">
+                            Corporate social responsibility initiatives, environmental sustainability programs, community development activities, and ESG performance.
+                        </p>
+                        <div class="pub-stats">
+                            <div class="stat-item">
+                                <span>📥</span>
+                                <span>1,892 downloads</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>📏</span>
+                                <span>7.8 MB</span>
+                            </div>
+                        </div>
+                        <div class="pub-actions">
+                            <a href="#" class="btn btn-primary">Download PDF</a>
+                            <a href="#" class="btn btn-outline">View Online</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Bihar State Power Holding Company Limited. All rights reserved.</p>
+            <p style="margin-top: 10px; font-size: 14px;">For queries, contact: info@bsphcl.co.in | Helpline: 1912</p>
+        </footer>
+    </div>
+
+    <script>
+        // Tab functionality
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                tabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Year filter functionality
+        const yearBtns = document.querySelectorAll('.year-btn');
+        yearBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                yearBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
